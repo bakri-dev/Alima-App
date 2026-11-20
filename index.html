@@ -3,414 +3,474 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Arab Learning App — Ruang Kelas Bahasa Arab Terstruktur</title>
+  <title>Portal Pembelajaran Bahasa Arab — Sistem Kelas Perkuliahan</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,700;1,400&family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,600;6..72,700&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --white:       #FFFFFF;
-      --bg-soft:     #F0F4F8;
-      --green-light: #E8F5EE;
-      --green:       #2D7A4F;
-      --green-dark:  #1F5938;
-      --navy:        #1E3A5F;
-      --text:        #1A2B3C;
-      --muted:       #5A7184;
-      --border:      #D6E4ED;
+      --bg-page:    #FAF9F6;
+      --surface:    #FFFFFF;
+      --surface-alt:#F2F5F3;
+      --primary:    #1B4332;
+      --primary-mid:#2D6A4F;
+      --primary-soft:#E8F1EC;
+      --ink:        #1C2421;
+      --ink-muted:  #52605A;
+      --border:     #DCE3DF;
+      --accent:     #B08938;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--white); line-height: 1.6; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-page);
+      color: var(--ink);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
 
-    /* NAV */
-    nav {
+    /* HEADER / NAVIGASI */
+    header {
       position: sticky; top: 0; z-index: 100;
-      background: var(--white); border-bottom: 1px solid var(--border);
-      padding: 0 5%; display: flex; align-items: center;
-      justify-content: space-between; height: 64px;
+      background: rgba(250, 249, 246, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
     }
-    .nav-logo {
-      font-family: 'Playfair Display', serif; font-size: 1.1rem;
-      font-weight: 700; color: var(--navy); text-decoration: none; letter-spacing: -0.02em;
+    .nav-container {
+      max-width: 1140px; margin: 0 auto; padding: 0 5%;
+      height: 68px; display: flex; align-items: center; justify-content: space-between;
     }
-    .nav-logo span { color: var(--green); }
-    .nav-links { display: flex; gap: 2rem; list-style: none; align-items: center; }
-    .nav-links a { font-size: 0.875rem; font-weight: 500; color: var(--muted); text-decoration: none; transition: color .2s; }
-    .nav-links a:hover { color: var(--green); }
-    .nav-cta { background: var(--green); color: var(--white) !important; padding: .45rem 1.1rem; border-radius: 6px; font-weight: 600 !important; }
-    .nav-cta:hover { background: var(--green-dark) !important; }
+    .brand {
+      display: flex; align-items: center; gap: 0.65rem;
+      text-decoration: none; color: var(--primary);
+    }
+    .brand-mark {
+      width: 34px; height: 34px; border-radius: 8px;
+      background: var(--primary); color: #FFFFFF;
+      font-family: 'Amiri', serif; font-size: 1.35rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .brand-name {
+      font-family: 'Newsreader', serif; font-size: 1.15rem; font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    .nav-menu { display: flex; gap: 1.75rem; list-style: none; align-items: center; }
+    .nav-menu a {
+      text-decoration: none; font-size: 0.875rem; font-weight: 500;
+      color: var(--ink-muted); transition: color 0.2s;
+    }
+    .nav-menu a:hover { color: var(--primary); }
+    .nav-btn {
+      background: var(--primary); color: #FFFFFF !important;
+      padding: 0.5rem 1.1rem; border-radius: 6px; font-weight: 600 !important;
+    }
+    .nav-btn:hover { background: var(--primary-mid) !important; }
 
-    /* HERO */
+    /* MENU MOBILE TOGGLE */
+    .menu-toggle {
+      display: none; background: none; border: 1px solid var(--border);
+      border-radius: 6px; padding: 0.45rem 0.65rem; color: var(--ink);
+      cursor: pointer; font-size: 0.85rem; font-weight: 600;
+    }
+
+    /* HERO SECTION (AKADEMIK & TERSTRUKTUR) */
     .hero {
-      min-height: calc(100vh - 64px);
+      max-width: 1140px; margin: 0 auto;
+      padding: 4.5rem 5% 4rem;
       display: grid; grid-template-columns: 1.15fr 0.85fr;
-      align-items: center; gap: 3.5rem;
-      padding: 4.5rem 5% 4rem; max-width: 1200px; margin: 0 auto;
+      gap: 3.5rem; align-items: center;
     }
-    .hero-text { max-width: 560px; }
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: .5rem;
-      font-size: 0.8rem; font-weight: 600; color: var(--green);
-      letter-spacing: .04em; margin-bottom: 1.25rem;
+    .hero-tag {
+      display: inline-block; font-size: 0.78rem; font-weight: 600;
+      color: var(--primary-mid); background: var(--primary-soft);
+      padding: 0.35rem 0.85rem; border-radius: 4px; margin-bottom: 1.25rem;
+      letter-spacing: 0.02em;
     }
-    .hero-eyebrow::before { content: ''; display: block; width: 24px; height: 2px; background: var(--green); }
     .hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.3rem, 4.8vw, 3.5rem); font-weight: 900;
-      line-height: 1.12; color: var(--navy); margin-bottom: 1.25rem; letter-spacing: -0.03em;
+      font-family: 'Newsreader', serif;
+      font-size: clamp(2.1rem, 4.2vw, 3.1rem);
+      font-weight: 700; line-height: 1.15; color: var(--ink);
+      margin-bottom: 1.25rem; letter-spacing: -0.02em;
     }
-    .hero h1 em { font-style: normal; color: var(--green); }
-    .hero p { font-size: 1.02rem; color: var(--muted); max-width: 46ch; margin-bottom: 2rem; line-height: 1.75; }
-    .hero-actions { display: flex; gap: 1.15rem; flex-wrap: wrap; align-items: center; }
-    .btn-primary {
-      background: var(--green); color: var(--white); padding: .75rem 1.6rem;
-      border-radius: 7px; font-weight: 600; font-size: .95rem; text-decoration: none; transition: background .2s;
+    .hero-desc {
+      font-size: 1.02rem; color: var(--ink-muted);
+      max-width: 50ch; margin-bottom: 2rem; line-height: 1.75;
     }
-    .btn-primary:hover { background: var(--green-dark); }
-    .btn-secondary {
-      color: var(--navy); font-weight: 500; font-size: .95rem; text-decoration: none;
-      border-bottom: 2px solid var(--border); padding-bottom: 2px; transition: border-color .2s, color .2s;
+    .hero-links { display: flex; gap: 1rem; flex-wrap: wrap; align-items: center; }
+    .btn-solid {
+      background: var(--primary); color: #FFFFFF;
+      padding: 0.75rem 1.5rem; border-radius: 6px;
+      text-decoration: none; font-weight: 600; font-size: 0.92rem;
+      transition: background 0.2s;
     }
-    .btn-secondary:hover { color: var(--green); border-color: var(--green); }
+    .btn-solid:hover { background: var(--primary-mid); }
+    .btn-ghost {
+      color: var(--primary); background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.75rem 1.4rem; border-radius: 6px;
+      text-decoration: none; font-weight: 600; font-size: 0.92rem;
+      transition: border-color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--primary); }
 
-    /* HERO VISUAL (TANPA BOX) */
-    .hero-visual {
-      display: flex; flex-direction: column; align-items: flex-start; justify-content: center;
-      border-left: 2px solid var(--border); padding-left: 2.25rem;
+    /* HERO RIGHT: PRATINJAU STRUKTUR PERTEMUAN (TANPA KARTU PROMO) */
+    .syllabus-preview {
+      border-left: 2px solid var(--border);
+      padding-left: 2rem;
     }
-    .arabic-word {
+    .arabic-header {
       font-family: 'Amiri', serif;
-      font-size: clamp(3.4rem, 7vw, 5.2rem); color: var(--navy);
-      line-height: 1.25; direction: rtl; font-weight: 700;
+      font-size: 2.6rem; font-weight: 700;
+      color: var(--primary); direction: rtl; text-align: right;
+      line-height: 1.4; margin-bottom: 0.25rem;
     }
-    .arabic-label {
-      margin-top: .5rem; font-size: .82rem; font-weight: 600;
-      color: var(--green); letter-spacing: .08em; text-transform: uppercase;
+    .arabic-caption {
+      font-size: 0.82rem; color: var(--ink-muted);
+      text-align: right; margin-bottom: 1.75rem;
+      padding-bottom: 1rem; border-bottom: 1px solid var(--border);
     }
-    .arabic-sub { margin-top: .25rem; font-size: .92rem; color: var(--muted); max-width: 34ch; }
-    .floating-tags { display: flex; gap: .55rem; margin-top: 1.35rem; flex-wrap: wrap; }
-    .tag {
-      background: var(--green-light); color: var(--green-dark);
-      font-size: .78rem; font-weight: 600; padding: .32rem .78rem; border-radius: 20px;
+    .topic-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+    .topic-item {
+      display: flex; justify-content: space-between; align-items: baseline;
+      gap: 1rem; padding-bottom: 0.85rem; border-bottom: 1px dashed var(--border);
     }
+    .topic-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .topic-title { font-size: 0.9rem; font-weight: 600; color: var(--ink); }
+    .topic-meta { font-size: 0.78rem; color: var(--ink-muted); white-space: nowrap; }
 
-    /* STATS */
-    .stats-bar { background: var(--bg-soft); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .stats-inner {
-      max-width: 1200px; margin: 0 auto; padding: 2rem 5%;
-      display: flex; gap: 3rem; flex-wrap: wrap;
+    /* SECTION UMUM */
+    section { padding: 4.5rem 5%; border-top: 1px solid var(--border); }
+    .container { max-width: 1140px; margin: 0 auto; }
+    .sec-head { max-width: 60ch; margin-bottom: 3rem; }
+    .sec-kicker {
+      font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--primary-mid); margin-bottom: 0.5rem;
     }
-    .stat { flex: 1; min-width: 150px; }
-    .stat-number { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--navy); line-height: 1; }
-    .stat-label { font-size: .82rem; color: var(--muted); margin-top: .35rem; }
-
-    /* SECTION */
-    section { padding: 5rem 5%; }
-    .section-inner { max-width: 1200px; margin: 0 auto; }
-    .section-heading { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1rem; }
-    .section-line { width: 4px; min-height: 48px; background: var(--green); border-radius: 2px; flex-shrink: 0; margin-top: 4px; }
-    .section-heading h2 {
-      font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.5rem);
-      font-weight: 700; color: var(--navy); line-height: 1.2; letter-spacing: -0.02em;
+    .sec-head h2 {
+      font-family: 'Newsreader', serif; font-size: clamp(1.65rem, 3vw, 2.25rem);
+      font-weight: 700; color: var(--ink); line-height: 1.25; margin-bottom: 0.75rem;
     }
-    .section-sub { font-size: 1rem; color: var(--muted); max-width: 56ch; margin-bottom: 3rem; padding-left: 1.25rem; }
+    .sec-head p { font-size: 0.96rem; color: var(--ink-muted); }
 
-    /* FITUR */
-    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 2rem; margin-top: 3rem; }
-    .feature-item { border-left: 3px solid var(--border); padding: 1.25rem 1.5rem 1.25rem 1.25rem; transition: border-color .2s; }
-    .feature-item:hover { border-color: var(--green); }
-    .feature-icon {
-      width: 44px; height: 44px; background: var(--green-light); border-radius: 10px;
-      display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;
+    /* FITUR & FUNGSI KELAS */
+    .bg-alt { background: var(--surface-alt); }
+    .grid-3 {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem;
     }
-    .feature-icon svg { width: 22px; height: 22px; stroke: var(--green-dark); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-    .feature-item h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--navy); margin-bottom: .45rem; }
-    .feature-item p { font-size: .875rem; color: var(--muted); line-height: 1.65; }
+    .func-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.75rem;
+    }
+    .func-icon {
+      width: 38px; height: 38px; border-radius: 6px;
+      background: var(--primary-soft); color: var(--primary);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.1rem;
+    }
+    .func-icon svg {
+      width: 20px; height: 20px; stroke: currentColor; fill: none;
+      stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round;
+    }
+    .func-card h3 {
+      font-size: 1.02rem; font-weight: 700; color: var(--ink); margin-bottom: 0.45rem;
+    }
+    .func-card p { font-size: 0.88rem; color: var(--ink-muted); line-height: 1.65; }
 
-    /* CARA KERJA */
-    .howto-bg { background: var(--bg-soft); }
-    .steps {
+    /* ALUR PERKULIAHAN */
+    .flow-list {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
-      margin-top: 3rem; position: relative; z-index: 0;
     }
-    .steps::before {
-      content: ''; position: absolute; top: 28px;
-      left: calc(100% / 6); right: calc(100% / 6);
-      height: 2px; background: var(--border); z-index: 0;
+    .flow-step {
+      padding-top: 1.25rem; border-top: 3px solid var(--primary);
     }
-    .step { position: relative; z-index: 1; background: var(--white); border-radius: 12px; padding: 2rem 1.5rem; border: 1px solid var(--border); }
-    .step-num {
-      width: 40px; height: 40px; background: var(--navy); color: var(--white);
-      border-radius: 50%; display: flex; align-items: center; justify-content: center;
-      font-weight: 700; font-size: .9rem; margin-bottom: 1.25rem;
+    .flow-num {
+      font-size: 0.8rem; font-weight: 700; color: var(--primary-mid);
+      margin-bottom: 0.5rem; display: block;
     }
-    .step h3 { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: .45rem; }
-    .step p { font-size: .875rem; color: var(--muted); line-height: 1.65; }
+    .flow-step h3 {
+      font-size: 1.05rem; font-weight: 700; color: var(--ink); margin-bottom: 0.5rem;
+    }
+    .flow-step p { font-size: 0.88rem; color: var(--ink-muted); line-height: 1.65; }
 
-    /* MATERI */
-    .materi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-top: 3rem; }
-    .materi-card { display: flex; align-items: flex-start; gap: 1rem; padding: 1.25rem 1.5rem; border: 1px solid var(--border); border-radius: 10px; background: var(--bg-soft); }
-    .materi-icon {
-      width: 40px; height: 40px; background: var(--white); border: 1px solid var(--border);
-      border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;
+    /* FORMAT MATERI */
+    .format-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem;
     }
-    .materi-icon svg { width: 20px; height: 20px; stroke: var(--navy); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-    .materi-card h4 { font-weight: 600; font-size: .92rem; color: var(--navy); margin-bottom: .25rem; }
-    .materi-card p { font-size: .82rem; color: var(--muted); line-height: 1.6; }
+    .format-box {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 1.4rem 1.6rem;
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .format-badge {
+      font-size: 0.75rem; font-weight: 700; color: var(--primary);
+      background: var(--primary-soft); padding: 0.3rem 0.6rem;
+      border-radius: 4px; flex-shrink: 0; margin-top: 2px;
+    }
+    .format-box h4 { font-size: 0.96rem; font-weight: 700; color: var(--ink); margin-bottom: 0.25rem; }
+    .format-box p { font-size: 0.86rem; color: var(--ink-muted); }
 
-    /* CTA */
-    .cta-section { background: var(--navy); padding: 5rem 5%; }
-    .cta-inner { max-width: 680px; margin: 0 auto; text-align: center; }
-    .cta-inner h2 {
-      font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.6rem);
-      font-weight: 900; color: var(--white); line-height: 1.2; margin-bottom: 1rem; letter-spacing: -0.02em;
+    /* PORTAL AKSES PERAN (PENGGANTI CTA PROMOSI) */
+    .access-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;
     }
-    .cta-inner h2 em { font-style: normal; color: var(--green); }
-    .cta-inner p { font-size: 1rem; color: rgba(255,255,255,.7); margin-bottom: 2.5rem; max-width: 46ch; margin-left: auto; margin-right: auto; line-height: 1.75; }
-    .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-    .btn-white { background: var(--white); color: var(--navy); padding: .75rem 1.75rem; border-radius: 7px; font-weight: 700; font-size: .95rem; text-decoration: none; transition: opacity .2s; }
-    .btn-white:hover { opacity: .9; }
-    .btn-outline-white { border: 2px solid rgba(255,255,255,.35); color: var(--white); padding: .75rem 1.6rem; border-radius: 7px; font-weight: 500; font-size: .95rem; text-decoration: none; transition: border-color .2s; }
-    .btn-outline-white:hover { border-color: rgba(255,255,255,.8); }
+    .role-panel {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 2.25rem;
+      display: flex; flex-direction: column; justify-content: space-between;
+    }
+    .role-panel.primary-role {
+      border-top: 4px solid var(--primary);
+    }
+    .role-panel.secondary-role {
+      border-top: 4px solid var(--accent);
+    }
+    .role-label {
+      font-size: 0.78rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.06em; color: var(--ink-muted); margin-bottom: 0.5rem;
+    }
+    .role-panel h3 {
+      font-family: 'Newsreader', serif; font-size: 1.45rem;
+      font-weight: 700; color: var(--ink); margin-bottom: 0.75rem;
+    }
+    .role-panel p {
+      font-size: 0.9rem; color: var(--ink-muted); margin-bottom: 1.75rem; line-height: 1.65;
+    }
+    .role-actions { display: flex; gap: 0.75rem; flex-wrap: wrap; }
 
     /* FOOTER */
-    footer { background: var(--navy); border-top: 1px solid rgba(255,255,255,.08); padding: 2rem 5%; }
-    .footer-inner {
-      max-width: 1200px; margin: 0 auto;
-      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+    footer {
+      border-top: 1px solid var(--border); background: var(--surface);
+      padding: 2rem 5%;
     }
-    .footer-logo { font-family: 'Playfair Display', serif; font-size: .95rem; font-weight: 700; color: rgba(255,255,255,.8); }
-    .footer-logo span { color: var(--green); }
-    footer p { font-size: .78rem; color: rgba(255,255,255,.45); }
+    .footer-container {
+      max-width: 1140px; margin: 0 auto;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem; font-size: 0.82rem; color: var(--ink-muted);
+    }
 
     /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .hero { grid-template-columns: 1fr; min-height: auto; padding: 3rem 5% 2.5rem; gap: 2.25rem; }
-      .hero-visual {
-        order: -1; align-items: center; text-align: center;
-        border-left: none; padding-left: 0; border-bottom: 1px solid var(--border); padding-bottom: 1.75rem;
-      }
-      .floating-tags { justify-content: center; }
-      .steps { grid-template-columns: 1fr; gap: 1.25rem; }
-      .steps::before { display: none; }
-      .materi-grid { grid-template-columns: 1fr; }
-      .nav-links { display: none; }
-      .stats-inner { gap: 1.5rem; }
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; gap: 2.5rem; padding-top: 3rem; }
+      .syllabus-preview { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 1.75rem; }
+      .grid-3, .flow-list { grid-template-columns: 1fr; }
+      .format-grid, .access-grid { grid-template-columns: 1fr; }
     }
-    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+    @media (max-width: 680px) {
+      .menu-toggle { display: block; }
+      .nav-menu {
+        display: none; position: absolute; top: 68px; left: 0; right: 0;
+        background: var(--surface); border-bottom: 1px solid var(--border);
+        flex-direction: column; align-items: flex-start; padding: 1.25rem 5%; gap: 1rem;
+      }
+      .nav-menu.open { display: flex; }
+    }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav aria-label="Navigasi Utama">
-  <a href="#" class="nav-logo">Arab <span>Learning</span></a>
-  <ul class="nav-links">
-    <li><a href="#fitur">Fitur</a></li>
-    <li><a href="#cara-kerja">Alur Kelas</a></li>
-    <li><a href="#materi">Format Ajar</a></li>
-    <li><a href="#daftar" class="nav-cta">Masuk Kelas</a></li>
-  </ul>
-</nav>
-
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-text">
-    <div class="hero-eyebrow">LMS Khusus Pembelajaran Bahasa Arab</div>
-    <h1>Bangun Kemahiran Bahasa Arab <em>Terarah per Pertemuan</em></h1>
-    <p>Satukan silabus, rekaman pelafalan, modul PDF, serta evaluasi pilihan ganda dan esai dalam satu ruang kelas yang rapi—dirancang untuk ritme perkuliahan dosen dan mahasiswa.</p>
-    <div class="hero-actions">
-      <a href="#daftar" class="btn-primary">Gabung ke Kelas</a>
-      <a href="#fitur" class="btn-secondary">Jelajahi kapabilitas</a>
+  <!-- HEADER -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="brand">
+        <span class="brand-mark" lang="ar">ع</span>
+        <span class="brand-name">Portal Bahasa Arab</span>
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="navMenu">Menu</button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="#fungsi">Fungsi Kelas</a></li>
+        <li><a href="#alur">Alur Perkuliahan</a></li>
+        <li><a href="#format">Format Bahan Ajar</a></li>
+        <li><a href="#akses" class="nav-btn">Masuk Kelas</a></li>
+      </ul>
     </div>
-  </div>
+  </header>
 
-  <div class="hero-visual">
-    <div class="arabic-word" lang="ar">الْعَرَبِيَّة</div>
-    <div class="arabic-label">Al-ʿArabiyyah</div>
-    <p class="arabic-sub">Latihan bacaan berharakat, pemahaman teks, dan menyimak audio terintegrasi dalam alur belajar.</p>
-    <div class="floating-tags">
-      <span class="tag">Kuis Otomatis &amp; Esai</span>
-      <span class="tag">Audio Pelafalan</span>
-      <span class="tag">Modul PDF</span>
-      <span class="tag">Kelompok Diskusi</span>
+  <!-- HERO -->
+  <main>
+    <div class="hero">
+      <div>
+        <span class="hero-tag">Sistem Pembelajaran Bahasa Arab Berbasis Kelas</span>
+        <h1>Pengelolaan Materi, Latihan, dan Evaluasi Bahasa Arab dalam Satu Ruang</h1>
+        <p class="hero-desc">
+          Platform akademik untuk mendukung kegiatan perkuliahan bahasa Arab. Dosen menyusun bahan ajar per pertemuan dan mengelola evaluasi, sementara mahasiswa mengakses materi serta mengumpulkan tugas sesuai kelas masing-masing.
+        </p>
+        <div class="hero-links">
+          <a href="#akses" class="btn-solid">Masuk ke Ruang Kelas</a>
+          <a href="#fungsi" class="btn-ghost">Lihat Struktur Sistem</a>
+        </div>
+      </div>
+
+      <!-- SISI KANAN: ILUSTRASI STRUKTUR PERTEMUAN -->
+      <aside class="syllabus-preview" aria-label="Contoh Susunan Pertemuan">
+        <div class="arabic-header" lang="ar">اللُّغَةُ الْعَرَبِيَّةُ</div>
+        <div class="arabic-caption">Susunan Pembelajaran Terarah per Pertemuan</div>
+        <ul class="topic-list">
+          <li class="topic-item">
+            <span class="topic-title">Pertemuan 1 — Mufradat &amp; Teks Bacaan</span>
+            <span class="topic-meta">Teks Arab (RTL)</span>
+          </li>
+          <li class="topic-item">
+            <span class="topic-title">Pertemuan 2 — Latihan Pelafalan &amp; Istima'</span>
+            <span class="topic-meta">Audio MP3</span>
+          </li>
+          <li class="topic-item">
+            <span class="topic-title">Pertemuan 3 — Kaidah Dasar &amp; Lembar Kerja</span>
+            <span class="topic-meta">Dokumen PDF</span>
+          </li>
+          <li class="topic-item">
+            <span class="topic-title">Evaluasi — Kuis Pemahaman &amp; Uraian</span>
+            <span class="topic-meta">PG &amp; Esai</span>
+          </li>
+        </ul>
+      </aside>
     </div>
-  </div>
-</div>
 
-<!-- STATS -->
-<div class="stats-bar">
-  <div class="stats-inner">
-    <div class="stat">
-      <div class="stat-number">500+</div>
-      <div class="stat-label">Mahasiswa aktif di berbagai rombongan</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number">3</div>
-      <div class="stat-label">Media utama: naskah Arab, PDF, dan audio</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number">2</div>
-      <div class="stat-label">Skema asesmen: objektif &amp; uraian esai</div>
-    </div>
-    <div class="stat">
-      <div class="stat-number">100%</div>
-      <div class="stat-label">Akses browser lintas perangkat</div>
-    </div>
-  </div>
-</div>
-
-<!-- FITUR -->
-<section id="fitur">
-  <div class="section-inner">
-    <div class="section-heading">
-      <div class="section-line"></div>
-      <h2>Dirancang untuk alur pengajaran bahasa yang nyata</h2>
-    </div>
-    <p class="section-sub">Kurangi beban administrasi kelas dan jaga fokus mahasiswa pada praktik membaca, menyimak, serta menyusun jawaban.</p>
-
-    <div class="features-grid">
-
-      <div class="feature-item">
-        <div class="feature-icon">
-          <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+    <!-- FUNGSI UTAMA KELAS -->
+    <section id="fungsi" class="bg-alt">
+      <div class="container">
+        <div class="sec-head">
+          <div class="sec-kicker">Kapabilitas Sistem</div>
+          <h2>Perangkat pengelolaan kelas untuk dosen dan mahasiswa</h2>
+          <p>Dirancang agar distribusi bahan ajar, pengerjaan tugas, dan rekapitulasi nilai berjalan tertib sesuai jadwal perkuliahan.</p>
         </div>
-        <h3>Multi-Kelas Berbasis Kode</h3>
-        <p>Kelola beberapa mata kuliah atau paralel kelas sekaligus; mahasiswa masuk instan memakai kode undangan kelas.</p>
-      </div>
 
-      <div class="feature-item">
-        <div class="feature-icon">
-          <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M21 21v-2a4 4 0 0 0-3-3.87"/></svg>
-        </div>
-        <h3>Pembagian Kelompok</h3>
-        <p>Pecah anggota kelas ke dalam kelompok kecil untuk latihan percakapan, terjemahan, atau proyek kolaboratif.</p>
-      </div>
+        <div class="grid-3">
+          <article class="func-card">
+            <div class="func-icon">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 20V10"/></svg>
+            </div>
+            <h3>Kelas Terpisah dengan Kode</h3>
+            <p>Dosen dapat membuka beberapa kelas mata kuliah secara bersamaan. Mahasiswa bergabung menggunakan kode kelas yang dibagikan dosen.</p>
+          </article>
 
-      <div class="feature-item">
-        <div class="feature-icon">
-          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
-        </div>
-        <h3>Urutan Silabus Terkunci</h3>
-        <p>Atur bahan ajar per pertemuan dan topik agar mahasiswa menuntaskan fondasi sebelum melangkah ke tahap berikutnya.</p>
-      </div>
+          <article class="func-card">
+            <div class="func-icon">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3>Pembagian Kelompok Belajar</h3>
+            <p>Peserta dalam satu kelas dapat dikelompokkan untuk keperluan diskusi, latihan percakapan, maupun penugasan terpisah.</p>
+          </article>
 
-      <div class="feature-item">
-        <div class="feature-icon">
-          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-        </div>
-        <h3>Koreksi Ganda: Objektif &amp; Esai</h3>
-        <p>Skor pilihan ganda terhitung otomatis, sementara jawaban esai dan uraian dikoreksi langsung oleh dosen ke buku nilai.</p>
-      </div>
+          <article class="func-card">
+            <div class="func-icon">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            </div>
+            <h3>Materi Tersusun per Topik</h3>
+            <p>Bahan ajar disusun berurutan berdasarkan pertemuan atau topik sehingga mahasiswa mempelajari materi sesuai tahapan yang ditentukan.</p>
+          </article>
 
-      <div class="feature-item">
-        <div class="feature-icon">
-          <svg aria-hidden="true" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-        </div>
-        <h3>Rekap Nilai &amp; Unduh CSV</h3>
-        <p>Pantau capaian seluruh peserta per pertemuan dan unduh rekap nilai dalam format CSV untuk pelaporan akademik.</p>
-      </div>
+          <article class="func-card">
+            <div class="func-icon">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </div>
+            <h3>Evaluasi Pilihan Ganda &amp; Esai</h3>
+            <p>Soal pilihan ganda dikoreksi otomatis oleh sistem, sedangkan jawaban esai diperiksa dan diberi nilai langsung oleh dosen.</p>
+          </article>
 
-      <div class="feature-item">
-        <div class="feature-icon">
-          <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        </div>
-        <h3>Batas Akses &amp; Kunci Aman</h3>
-        <p>Visibilitas dibatasi per keanggotaan kelas, dengan validasi penilaian di sisi server agar kunci jawaban tidak terekspos.</p>
-      </div>
+          <article class="func-card">
+            <div class="func-icon">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/></svg>
+            </div>
+            <h3>Rekapitulasi &amp; Ekspor Nilai</h3>
+            <p>Seluruh hasil latihan dan tugas tersimpan per mahasiswa dan dapat diunduh dalam format CSV untuk arsip penilaian kelas.</p>
+          </article>
 
-    </div>
-  </div>
-</section>
-
-<!-- CARA KERJA -->
-<section class="howto-bg" id="cara-kerja">
-  <div class="section-inner">
-    <div class="section-heading">
-      <div class="section-line"></div>
-      <h2>Siap dipakai dalam tiga langkah</h2>
-    </div>
-    <p class="section-sub">Proses penyiapan kelas dibuat lugas tanpa konfigurasi teknis yang berbelit.</p>
-
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">1</div>
-        <h3>Buka akun &amp; terbitkan kode kelas</h3>
-        <p>Dosen menyiapkan ruang kelas baru dalam hitungan menit dan membagikan kode akses unik kepada peserta didik.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <h3>Susun bahan &amp; tenggat evaluasi</h3>
-        <p>Unggah teks Arab, dokumen PDF, atau rekaman audio, lalu tetapkan paket soal beserta batas waktu pengumpulan.</p>
-      </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <h3>Mahasiswa belajar &amp; menyetor tugas</h3>
-        <p>Peserta masuk memakai kode kelas, menyimak materi sesuai jadwal, dan mengirimkan jawaban dari ponsel maupun laptop.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- MATERI -->
-<section id="materi">
-  <div class="section-inner">
-    <div class="section-heading">
-      <div class="section-line"></div>
-      <h2>Satu wadah untuk beragam bentuk ajar</h2>
-    </div>
-    <p class="section-sub">Selaraskan latihan qira'ah, istima', dan pendalaman rujukan dalam satu antarmuka yang konsisten.</p>
-
-    <div class="materi-grid">
-
-      <div class="materi-card">
-        <div class="materi-icon">
-          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-        </div>
-        <div>
-          <h4>Naskah Teks Arab (RTL)</h4>
-          <p>Sajikan mufradat, hiwar, atau kaidah langsung di halaman dengan tata letak kanan-ke-kiri yang terjaga.</p>
+          <article class="func-card">
+            <div class="func-icon">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <h3>Kontrol Akses &amp; Validasi</h3>
+            <p>Setiap mahasiswa hanya dapat melihat kelas yang diikutinya, dan proses penilaian berjalan di server sehingga kunci jawaban tetap terlindungi.</p>
+          </article>
         </div>
       </div>
+    </section>
 
-      <div class="materi-card">
-        <div class="materi-icon">
-          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+    <!-- ALUR PENGGUNAAN -->
+    <section id="alur">
+      <div class="container">
+        <div class="sec-head">
+          <div class="sec-kicker">Alur Penggunaan</div>
+          <h2>Tahapan kegiatan belajar dalam satu semester</h2>
+          <p>Alur kerja disusun sederhana agar dosen dan mahasiswa dapat langsung menggunakannya tanpa pengaturan yang rumit.</p>
         </div>
-        <div>
-          <h4>Lembar Kerja &amp; Modul PDF</h4>
-          <p>Bagikan diktat, daftar kosakata, atau bacaan pendukung yang dapat dibaca langsung atau disimpan mahasiswa.</p>
+
+        <div class="flow-list">
+          <div class="flow-step">
+            <span class="flow-num">TAHAP 01</span>
+            <h3>Pembuatan Kelas oleh Dosen</h3>
+            <p>Dosen membuat ruang kelas baru sesuai mata kuliah, lalu membagikan kode unik kelas kepada mahasiswa peserta.</p>
+          </div>
+          <div class="flow-step">
+            <span class="flow-num">TAHAP 02</span>
+            <h3>Penyusunan Materi &amp; Tugas</h3>
+            <p>Dosen mengunggah bahan ajar dan menyusun paket soal pilihan ganda maupun esai lengkap dengan batas waktu pengumpulan.</p>
+          </div>
+          <div class="flow-step">
+            <span class="flow-num">TAHAP 03</span>
+            <h3>Akses Materi &amp; Pengumpulan</h3>
+            <p>Mahasiswa bergabung memakai kode kelas, mempelajari materi per pertemuan, dan mengirimkan jawaban tugas melalui peramban.</p>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="materi-card">
-        <div class="materi-icon">
-          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+    <!-- FORMAT BAHAN AJAR -->
+    <section id="format" class="bg-alt">
+      <div class="container">
+        <div class="sec-head">
+          <div class="sec-kicker">Format Bahan Ajar</div>
+          <h2>Dukungan media untuk pembelajaran bahasa Arab</h2>
+          <p>Platform mengakomodasi penyajian teks berbahasa Arab maupun dokumen dan rekaman suara pendukung perkuliahan.</p>
         </div>
-        <div>
-          <h4>Rekaman Audio MP3</h4>
-          <p>Putar contoh makhraj, pelafalan kalimat, atau materi menyimak singkat langsung tanpa berpindah aplikasi.</p>
+
+        <div class="format-grid">
+          <div class="format-box">
+            <span class="format-badge">TEKS</span>
+            <div>
+              <h4>Naskah Bacaan &amp; Kaidah (RTL)</h4>
+              <p>Penulisan teks langsung pada halaman dengan dukungan arah baca kanan-ke-kiri untuk tulisan berbahasa Arab.</p>
+            </div>
+          </div>
+
+          <div class="format-box">
+            <span class="format-badge">PDF</span>
+            <div>
+              <h4>Modul &amp; Lembar Kerja</h4>
+              <p>Unggah diktat kuliah, ringkasan nahwu-sharaf, atau bahan bacaan agar dapat dibuka dan diunduh mahasiswa.</p>
+            </div>
+          </div>
+
+          <div class="format-box">
+            <span class="format-badge">MP3</span>
+            <div>
+              <h4>Audio Pelafalan &amp; Menyimak</h4>
+              <p>Rekaman contoh pengucapan kosakata maupun percakapan yang dapat diputar langsung pada halaman materi.</p>
+            </div>
+          </div>
+
+          <div class="format-box">
+            <span class="format-badge">TAUTAN</span>
+            <div>
+              <h4>Referensi Sumber Daring</h4>
+              <p>Sematkan tautan menuju kamus digital, rekaman kuliah video, atau bacaan rujukan eksternal yang relevan.</p>
+            </div>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="materi-card">
-        <div class="materi-icon">
-          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+    <!-- PORTAL AKSES PERAN -->
+    <section id="akses">
+      <div class="container">
+        <div class="sec-head">
+          <div class="sec-kicker">Akses Pengguna</div>
+          <h2>Masuk sesuai peran perkuliahan</h2>
+          <p>Pilih jalur akses di bawah ini untuk mulai mengelola kelas atau bergabung sebagai peserta mata kuliah.</p>
         </div>
-        <div>
-          <h4>Referensi Tautan Luar</h4>
-          <p>Sematkan tautan video pembelajaran, kamus daring, atau artikel rujukan yang sudah tersedia secara terarah.</p>
-        </div>
-      </div>
 
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-section" id="daftar">
-  <div class="cta-inner">
-    <h2>Punya kode kelas? <em>Mulai sesi belajarmu.</em></h2>
-    <p>Dosen membuka kelas dan mengatur kurikulu
+        <div class="access-grid">
+          <div class="role-panel primary-role">
+            <div>
